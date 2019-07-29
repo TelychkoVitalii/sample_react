@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Router, Switch, Route } from 'react-router-dom';
+import { routes } from "./router/route.config";
+import { history } from "./helpers/history";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      // Router wrapper
+      <Router history={history}>
+        <Switch>
+          {routes.map((r, i) => <Route key={i} exact path={r.path} component={r.component} />)}
+        </Switch>
+      </Router>
+    );
+  }
 }
-
-export default App;
